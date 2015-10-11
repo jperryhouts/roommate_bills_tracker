@@ -4,10 +4,10 @@ body {
 }
 
 div.content {
-    padding: 50px;
+    padding: 25px 50px 25px;
     background-color: white;
     width: 700px;
-    margin: 0px auto 50px;
+    margin: 0px auto 25px;
 }
 
 div.warning {
@@ -76,4 +76,10 @@ input.submit_button {
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.deletebutton {
+    width: 20px;
+    height: 20px;
+    margin: auto;
 }
