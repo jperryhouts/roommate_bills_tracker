@@ -1,0 +1,71 @@
+65a66
+> 
+102c103
+< #LoadModule include_module libexec/apache24/mod_include.so
+---
+> LoadModule include_module libexec/apache24/mod_include.so
+159c160
+< 	#LoadModule cgid_module libexec/apache24/mod_cgid.so
+---
+> 	LoadModule cgid_module libexec/apache24/mod_cgid.so
+162c163
+< 	#LoadModule cgi_module libexec/apache24/mod_cgi.so
+---
+> 	LoadModule cgi_module libexec/apache24/mod_cgi.so
+210c211
+< ServerAdmin you@example.com
+---
+> ServerAdmin jonathan@invertedearth.net
+219c220
+< #ServerName www.example.com:80
+---
+> ServerName foxinsocks.rocks:80
+243,244c244,245
+< DocumentRoot "/usr/local/www/apache24/data"
+< <Directory "/usr/local/www/apache24/data">
+---
+> DocumentRoot "/usr/local/www/apache24/view"
+> <Directory "/usr/local/www/apache24/view">
+257c258,259
+<     Options Indexes FollowSymLinks
+---
+>     Options Indexes FollowSymLinks Includes
+>     XBitHack on
+264c266
+<     AllowOverride None
+---
+>     AllowOverride AuthConfig
+269c271,275
+<     Require all granted
+---
+>     AuthType Basic
+>     AuthName "Bills"
+>     AuthBasicProvider file
+>     AuthUserFile "/usr/local/etc/apache24/passwords"
+>     Require user 1065
+277c283
+<     DirectoryIndex index.html
+---
+>     DirectoryIndex index.php index.html index.htm index.shtml
+360c366
+<     ScriptAlias /cgi-bin/ "/usr/local/www/apache24/cgi-bin/"
+---
+>     ScriptAlias /controller/ "/usr/local/www/apache24/controller/"
+373c379
+< # "/usr/local/www/apache24/cgi-bin" should be changed to whatever your ScriptAliased
+---
+> # "/usr/local/www/apache24/controller" should be changed to whatever your ScriptAliased
+376c382
+< <Directory "/usr/local/www/apache24/cgi-bin">
+---
+> <Directory "/usr/local/www/apache24/controller">
+415c421
+<     #AddHandler cgi-script .cgi
+---
+>     AddHandler cgi-script .py
+426,427c432,433
+<     #AddType text/html .shtml
+<     #AddOutputFilter INCLUDES .shtml
+---
+>     AddType text/html .shtml
+>     AddOutputFilter INCLUDES .shtml

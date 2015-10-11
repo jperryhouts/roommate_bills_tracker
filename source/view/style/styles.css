@@ -1,0 +1,79 @@
+body {
+    background-color: #d0e4fe;
+    padding: 50px 0px 0px;
+}
+
+div.content {
+    padding: 50px;
+    background-color: white;
+    width: 700px;
+    margin: 0px auto 50px;
+}
+
+div.warning {
+    padding: 5px 50px 5px;
+    background-color: white;
+    width: 700px;
+    margin: 10px auto 10px;
+    color: red;
+    font-weight: bold;
+}
+
+div.success {
+    background-color: white;
+    width: 700px;
+    margin: 0px auto 50px;
+    color: green;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid green;
+    background-color: #f1f1f1;
+}
+
+th, td, option {
+    text-align: left;
+}
+
+th.long, td.long {
+    min-width: 150px;
+    text-align: left;
+}
+
+td.the_black {
+    color: black;
+}
+
+td.the_red {
+    color: red;
+}
+
+.name {
+    width:80px;
+}
+.date {
+    width:100px;
+}
+.currency {
+    width: 80px;
+}
+input, select {
+    width: 100%
+}
+input.submit_button {
+    width: auto;
+    float: right;
+}
+.right {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
