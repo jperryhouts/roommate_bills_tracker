@@ -5,6 +5,7 @@ import cgitb, sys
 cgitb.enable()
 sys.path.insert(0, '../controller')
 import cgi, datetime, json, StringIO
+from html5print import HTMLBeautifier
 from decimal import Decimal as Dec
 from ledger import Ledger
 import page_elements
@@ -13,9 +14,7 @@ if __name__ == '__main__':
     settings = json.load(open('../model/settings.json'))
     ledger = Ledger('../model/ledger.db', settings['roommate_names'])
 
-    print 'Content-Type: text/html;charset=utf-8'
-    print
-    print '''
+    html = '''
            <html>
            <head>
                <title>Cannon Ct. Bills</title>
@@ -57,4 +56,8 @@ if __name__ == '__main__':
                    current_date=datetime.datetime.now().isoformat()[:10], \
                    whofrom_dropdown=page_elements.roommate_dropdown(ledger.get_account_names(), False), \
                    whoto_dropdown=page_elements.roommate_dropdown(ledger.get_account_names(), True))
+
+    print('Content-Type: text/html;charset=utf-8')
+    print('')
+    print(HTMLBeautifier.beautify(html))
     ledger.close()
