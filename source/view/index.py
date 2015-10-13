@@ -27,31 +27,55 @@ if __name__ == '__main__':
                {warnings}
 
                <div class="content">
-                   {debts_table}
+                   <table>
+                       <caption>{totals_caption}</caption>
+                       <tr>
+                           <th class="date">Name</th>
+                           <th>Total paid</th>
+                           <th>Total owed</th>
+                       </tr>
+
+                       {debts_table}
+
+                   </table>
                </div>
 
                <div class="content">
                    <p>
-                       {transactions_table}
+                        <table>
+                            <caption>Transactions</caption>
+                            <tr>
+                                <th class="date">Date</th>
+                                <th class="name">From</th>
+                                <th class="name">To</th>
+                                <th class="currency">Amount</th>
+                                <th>Comment</th>
+                                <th class="submit"></th>
+                            </tr>
+
+                           {transactions_table}
+
+                        </table>
                    </p>
 
                    <p>
                        <form method="post">
                            <table>
                                <tr>
-                                   <td class="date"><input type="text" name="WHEN" value="{current_date}" /></td>
-                                   <td class="name">{whofrom_dropdown}</td>
-                                   <td class="name">{whoto_dropdown}</td>
-                                   <td class="currency"><input type="text" name="AMOUNT" /></td>
-                                   <td><input type="text" name="COMMENT" /></td>
+                                   <th class="date"><input type="text" name="WHEN" value="{current_date}" /></th>
+                                   <th class="name">{whofrom_dropdown}</th>
+                                   <th class="name">{whoto_dropdown}</th>
+                                   <th class="currency"><input type="text" name="AMOUNT" /></th>
+                                   <th><input type="text" name="COMMENT" /></th>
+                                   <th class="submit"><input type="submit" value="+" /></th>
                                </tr>
                            </table>
-                           <input class="submit_button" type="submit" value="Add" />
                        </form>
                    </p>
                </div>
            </body>
            </html>'''.format(warnings=ledger.add_remove_transaction(cgi.FieldStorage()), \
+                   totals_caption=page_elements.totals_caption(ledger), \
                    debts_table=page_elements.showdebts(ledger), \
                    transactions_table=page_elements.showtransactions(ledger), \
                    current_date=datetime.datetime.now().isoformat()[:10], \

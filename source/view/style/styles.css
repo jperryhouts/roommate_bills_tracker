@@ -27,6 +27,14 @@ div.success {
     font-weight: bold;
 }
 
+input {
+    width: 90%;
+}
+
+select {
+    width: 100%;
+}
+
 table {
     width: 100%;
     margin: auto;
@@ -39,13 +47,9 @@ table, th, td {
     background-color: #f1f1f1;
 }
 
-th, td, option {
+th, td {
     text-align: left;
-}
-
-th.long, td.long {
-    min-width: 150px;
-    text-align: left;
+    padding:3px;
 }
 
 td.the_black {
@@ -56,30 +60,20 @@ td.the_red {
     color: red;
 }
 
-.name {
+th.name, th.currency {
     width:80px;
 }
-.date {
+
+th.date {
     width:100px;
 }
-.currency {
-    width: 80px;
+
+th.submit {
+    width: 25px;
 }
-input, select {
-    width: 100%
-}
-input.submit_button {
-    width: auto;
-    float: right;
-}
+
 .right {
     position: absolute;
     right: 10px;
     top: 10px;
-}
-
-.deletebutton {
-    width: 20px;
-    height: 20px;
-    margin: auto;
 }
