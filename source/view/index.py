@@ -15,6 +15,7 @@ if __name__ == '__main__':
     ledger = Ledger('../model/ledger.db', settings['roommate_names'])
 
     html = '''
+           <!DOCTYPE html>
            <html>
            <head>
                <title>Cannon Ct. Bills</title>
