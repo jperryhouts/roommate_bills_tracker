@@ -1,5 +1,6 @@
 import os, re, sqlite3
 from decimal import Decimal as Dec
+from datetime import datetime
 
 class Ledger():
     def __init__ (self, db, account_names):
@@ -32,7 +33,8 @@ class Ledger():
         log = open('../model/log.txt', 'a')
         with self.db as ledger:
             cur = ledger.cursor()
-            print >>log, 'Creating record:', date, whofrom, whoto, amount, '"'+comment+'"'
+            print >>log, datetime.now().isoformat(), \
+                    'Creating record:', date, whofrom, whoto, amount, '"'+comment+'"'
             cur.execute("INSERT INTO Transactions (Date, WhoFrom, WhoTo, Amount, Comment) \
                     VALUES(:date, :whofrom, :whoto, :amount, :comment)",\
                     {'date':date, 'whofrom':whofrom, 'whoto':whoto, 'amount':amount, 'comment':comment})
@@ -43,7 +45,10 @@ class Ledger():
         with self.db as ledger:
             cur = ledger.cursor()
             cur.execute("SELECT * FROM Transactions WHERE TransactionID=?", (entry_id,))
-            print >>log, 'Removing record:', cur.fetchall()
+            tr = cur.fetchall()[0]
+            logtxt = '%s Removing record: %s %s %s %g %s'%(datetime.now().isoformat(), \
+                    tr[1], tr[2], tr[3], tr[4], tr[5])
+            print >>log, logtxt
             cur.execute("DELETE FROM Transactions WHERE TransactionID=?", (entry_id,))
         log.close()
 
