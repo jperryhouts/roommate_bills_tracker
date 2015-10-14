@@ -2,10 +2,13 @@
 
 import StringIO
 from decimal import Decimal as Dec
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 def showtransactions (ledger):
     output = StringIO.StringIO()
     for (transaction_id, date, whofrom, whoto, amount, comment) in ledger.get_all():
+        amount = locale.currency(amount)
         output.write('  <tr>\n')
         for col in (date, whofrom, whoto, amount, comment):
             output.write('    <td>'+str(col)+'</td>\n')
@@ -37,8 +40,8 @@ def showdebts (ledger):
         money_class = 'the_black' if owed >= Dec('0.00') else 'the_red'
         output.write('  <tr>\n')
         output.write('    <td>'+name+'</td>\n')
-        output.write('    <td>'+str(paid-received)+'</td>\n')
-        output.write('    <td class="{}">'.format(money_class)+str(owed.quantize(one_cent))+'</td>\n')
+        output.write('    <td>'+locale.currency(paid-received)+'</td>\n')
+        output.write('    <td class="{}">'.format(money_class)+locale.currency(owed.quantize(one_cent))+'</td>\n')
         output.write('  </tr>\n')
     return output.getvalue()
 
