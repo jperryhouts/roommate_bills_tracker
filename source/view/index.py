@@ -32,7 +32,7 @@ if __name__ == '__main__':
                        <caption>{totals_caption}</caption>
                        <tr>
                            <th class="date">Name</th>
-                           <th>Total paid (Paid - Recvd.)</th>
+                           <th>Net paid (Paid - Recvd.)</th>
                            <th>Owes ({bills_per_person} - Amt Paid)</th>
                        </tr>
 
