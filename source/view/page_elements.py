@@ -25,8 +25,13 @@ def totals_caption (ledger):
     total_bills = ledger.all_bills()
     n_roommates = len(ledger.get_account_names())
     bills_per_person = Dec(total_bills) / Dec(n_roommates)
-    one_cent = Dec('0.01')
-    return 'Total Expenses: ${0:.2f} (${1:.2f} / each)'.format(total_bills, bills_per_person)
+    return 'Expenses (Total amount paid to \'BILLS\'): ${0:.2f} (${1:.2f} / each)'.format(total_bills, bills_per_person)
+
+def get_bills_per_person (ledger):
+    total_bills = ledger.all_bills()
+    n_roommates = len(ledger.get_account_names())
+    bills_per_person = Dec(total_bills) / Dec(n_roommates)
+    return '${0:.2f}'.format(bills_per_person)
 
 def showdebts (ledger):
     output = StringIO.StringIO()
@@ -36,12 +41,12 @@ def showdebts (ledger):
     one_cent = Dec('0.01')
     for name in ledger.get_account_names():
         paid, received = ledger.get_paid_received(name)
-        owed = (paid-received)-bills_per_person
-        money_class = 'the_black' if owed >= Dec('0.00') else 'the_red'
+        owes = bills_per_person-(paid-received)
+        money_class = 'the_black' if owes < Dec('0.00') else 'the_red'
         output.write('  <tr>\n')
         output.write('    <td>'+name+'</td>\n')
         output.write('    <td>'+locale.currency(paid-received)+'</td>\n')
-        output.write('    <td class="{}">'.format(money_class)+locale.currency(owed.quantize(one_cent))+'</td>\n')
+        output.write('    <td class="{}">'.format(money_class)+locale.currency(owes.quantize(one_cent))+'</td>\n')
         output.write('  </tr>\n')
     return output.getvalue()
 

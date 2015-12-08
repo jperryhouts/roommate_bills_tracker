@@ -32,8 +32,8 @@ if __name__ == '__main__':
                        <caption>{totals_caption}</caption>
                        <tr>
                            <th class="date">Name</th>
-                           <th>Total paid</th>
-                           <th>Total owed</th>
+                           <th>Total paid (Paid - Recvd.)</th>
+                           <th>Owes ({bills_per_person} - Amt Paid)</th>
                        </tr>
 
                        {debts_table}
@@ -42,43 +42,42 @@ if __name__ == '__main__':
                </div>
 
                <div class="content">
-                   <p>
-                        <table>
-                            <caption>Transactions</caption>
-                            <tr>
-                                <th class="date">Date</th>
-                                <th class="name">From</th>
-                                <th class="name">To</th>
-                                <th class="currency">Amount</th>
-                                <th>Comment</th>
-                                <th class="submit"></th>
-                            </tr>
+                    <table>
+                        <caption>Transactions</caption>
+                        <tr>
+                            <th class="date">Date</th>
+                            <th class="name">From</th>
+                            <th class="name">To</th>
+                            <th class="currency">Amount</th>
+                            <th>Comment</th>
+                            <th class="submit"></th>
+                        </tr>
 
-                           {transactions_table}
+                       {transactions_table}
 
-                        </table>
-                   </p>
+                    </table>
 
-                   <p>
-                       <form method="post">
-                           <table>
-                               <tr>
-                                   <th class="date"><input type="text" name="WHEN" value="{current_date}" /></th>
-                                   <th class="name">{whofrom_dropdown}</th>
-                                   <th class="name">{whoto_dropdown}</th>
-                                   <th class="currency"><input type="text" name="AMOUNT" /></th>
-                                   <th><input type="text" name="COMMENT" /></th>
-                                   <th class="submit"><input type="submit" value="+" /></th>
-                               </tr>
-                           </table>
-                       </form>
-                   </p>
+                   <p></p>
+
+                   <form method="post">
+                       <table>
+                           <tr>
+                               <th class="date"><input type="text" name="WHEN" value="{current_date}" /></th>
+                               <th class="name">{whofrom_dropdown}</th>
+                               <th class="name">{whoto_dropdown}</th>
+                               <th class="currency"><input type="text" name="AMOUNT" /></th>
+                               <th><input type="text" name="COMMENT" /></th>
+                               <th class="submit"><input type="submit" value="+" /></th>
+                           </tr>
+                       </table>
+                   </form>
                </div>
 
                {piwik}
            </body>
            </html>'''.format(warnings=ledger.add_remove_transaction(cgi.FieldStorage()), \
                    totals_caption=page_elements.totals_caption(ledger), \
+                   bills_per_person=page_elements.get_bills_per_person(ledger), \
                    debts_table=page_elements.showdebts(ledger), \
                    transactions_table=page_elements.showtransactions(ledger), \
                    current_date=datetime.datetime.now().isoformat()[:10], \
@@ -88,5 +87,6 @@ if __name__ == '__main__':
 
     print('Content-Type: text/html;charset=utf-8')
     print('')
-    print(HTMLBeautifier.beautify(html))
+    print(html)
+#    print(HTMLBeautifier.beautify(html))
     ledger.close()
