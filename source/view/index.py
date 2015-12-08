@@ -33,7 +33,7 @@ if __name__ == '__main__':
                        <tr>
                            <th class="date">Name</th>
                            <th>Net paid (Paid - Recvd.)</th>
-                           <th>Owes ({bills_per_person} - Amt Paid)</th>
+                           <th>Owes ({bills_per_person} - Net paid)</th>
                        </tr>
 
                        {debts_table}
