@@ -25,7 +25,7 @@ def totals_caption (ledger):
     total_bills = ledger.all_bills()
     n_roommates = len(ledger.get_account_names())
     bills_per_person = Dec(total_bills) / Dec(n_roommates)
-    return 'Expenses (Total amount paid to \'BILLS\'): ${0:.2f} (${1:.2f} / each)'.format(total_bills, bills_per_person)
+    return 'Expenses (Net amount paid to \'BILLS\'): ${0:.2f} (${1:.2f} / each)'.format(total_bills, bills_per_person)
 
 def get_bills_per_person (ledger):
     total_bills = ledger.all_bills()
