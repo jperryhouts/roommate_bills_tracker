@@ -42,7 +42,7 @@ def showdebts (ledger):
     for name in ledger.get_account_names():
         paid, received = ledger.get_paid_received(name)
         owes = bills_per_person-(paid-received)
-        money_class = 'the_black' if owes < Dec('0.00') else 'the_red'
+        money_class = 'the_black' if owes < Dec('0.01') else 'the_red'
         output.write('  <tr>\n')
         output.write('    <td>'+name+'</td>\n')
         output.write('    <td>'+locale.currency(paid-received)+'</td>\n')
