@@ -7,17 +7,22 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 def showtransactions (ledger):
     output = StringIO.StringIO()
-    for (transaction_id, date, whofrom, whoto, amount, comment) in ledger.get_all():
+    all_transactions = ledger.get_all()
+    for i, (transaction_id, date, whofrom, whoto, amount, comment) in enumerate(all_transactions):
         amount = locale.currency(amount)
         output.write('  <tr>\n')
         for col in (date, whofrom, whoto, amount, comment):
             output.write('    <td>'+str(col)+'</td>\n')
-        output.write('    <td><form method="post">\n')
-        output.write('        <input type="hidden" name="delete" value="')
-        output.write(transaction_id)
-        output.write('"/>\n')
-        output.write('        <input type="submit" value="X"/>\n')
-        output.write('    </form></td>\n')
+        output.write('    <td>')
+        if (len(all_transactions) - i) < 5:
+            # Only allow the most recent transactions to be deleted
+            output.write('<form method="post">\n')
+            output.write('        <input type="hidden" name="delete" value="')
+            output.write(transaction_id)
+            output.write('"/>\n')
+            output.write('        <input type="submit" value="X"/>\n')
+            output.write('    </form>')
+        output.write('</td>\n')
         output.write('  </tr>\n')
     return output.getvalue()
 
