@@ -1,8 +1,15 @@
 {
+    "URI": "https://www.example.net/",
+    "domain": "example.net",
     "roommate_names": [
         "Gomez",
         "Morticia",
         "Wednesday",
         "Pugsley"
+    ],
+    "reminder_subject": "House Bills",
+    "email_addresses": [
+        "email1@example.com",
+        "email2@example.com"
     ]
 }
