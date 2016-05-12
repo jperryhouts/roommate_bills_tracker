@@ -81,7 +81,7 @@ class Ledger():
         date = form.getvalue('WHEN', '').strip()
         whofrom = form.getvalue('FROM', '').strip()
         whoto = form.getvalue('TO', '').strip()
-        amount = form.getvalue('AMOUNT', '').strip()
+        amount = form.getvalue('AMOUNT', '').replace('$','').strip()
         comment = form.getvalue('COMMENT', '').strip()
         if date == '' \
                 and whofrom == '' \
