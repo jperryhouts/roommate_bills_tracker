@@ -20,7 +20,8 @@ if __name__ == '__main__':
            <html>
            <head>
                <title>Cannon Ct. Bills</title>
-               <link rel="stylesheet" href="style/styles.css">
+               <link rel="stylesheet" href="style/styles.css" />
+               <link rel="icon" type="image/png" href="images/bills_icon.png" />
            </head>
            
            <body>
