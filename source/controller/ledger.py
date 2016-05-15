@@ -11,7 +11,7 @@ class Ledger():
             self.db = sqlite3.connect(db)
 
     def get_account_names (self):
-        return self.account_names
+        return sorted(self.account_names)
 
     def close (self):
         self.db.close()
