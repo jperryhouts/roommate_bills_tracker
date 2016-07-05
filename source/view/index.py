@@ -8,7 +8,6 @@ import cgi, datetime, json, StringIO
 from html5print import HTMLBeautifier
 from decimal import Decimal as Dec
 from ledger import Ledger
-import tracking
 import page_elements
 
 if __name__ == '__main__':
@@ -73,8 +72,6 @@ if __name__ == '__main__':
                        </table>
                    </form>
                </div>
-
-               {piwik}
            </body>
            </html>'''.format(warnings=ledger.add_remove_transaction(cgi.FieldStorage()), \
                    totals_caption=page_elements.totals_caption(ledger), \
@@ -83,8 +80,7 @@ if __name__ == '__main__':
                    transactions_table=page_elements.showtransactions(ledger), \
                    current_date=datetime.datetime.now().isoformat()[:10], \
                    whofrom_dropdown=page_elements.roommate_dropdown(ledger.get_account_names(), False), \
-                   whoto_dropdown=page_elements.roommate_dropdown(ledger.get_account_names(), True), \
-                   piwik=tracking.piwik_code())
+                   whoto_dropdown=page_elements.roommate_dropdown(ledger.get_account_names(), True))
 
     print('Content-Type: text/html;charset=utf-8')
     print('')
