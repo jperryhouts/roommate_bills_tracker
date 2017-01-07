@@ -60,15 +60,15 @@ td.the_red {
     color: red;
 }
 
-th.name, th.currency {
+td.name, th.name, td.currency, th.currency {
     width:80px;
 }
 
-th.date {
+th.date, td.date {
     width:100px;
 }
 
-th.submit {
+th.submit, td.submit {
     width: 25px;
 }
 

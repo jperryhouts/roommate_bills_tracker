@@ -3,18 +3,22 @@ from decimal import Decimal as Dec
 from datetime import datetime
 
 class Ledger():
-    def __init__ (self, db, account_names):
+    def __init__ (self, dbpath, account_names):
         self.account_names = account_names
-        if not os.path.exists(db):
-            self.db = self.createdb(db)
+        self.dbpath = dbpath
+
+    def __enter__(self):
+        if not os.path.exists(self.dbpath):
+            self.db = self.createdb(self.dbpath)
         else:
-            self.db = sqlite3.connect(db)
+            self.db = sqlite3.connect(self.dbpath)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.db.close()
 
     def get_account_names (self):
         return sorted(self.account_names)
-
-    def close (self):
-        self.db.close()
 
     def createdb (self, db):
         ledger = sqlite3.connect(db)
@@ -30,27 +34,22 @@ class Ledger():
         return ledger
 
     def insert (self, date, whofrom, whoto, amount, comment):
-        log = open('../model/log.txt', 'a')
-        with self.db as ledger:
+        with open('../model/log.txt', 'a') as log, self.db as ledger:
+            print >>log, '%s Creating record: %s %s %s $%0.2f "%s"'%(datetime.now().isoformat(), \
+                    date, whofrom, whoto, float(amount), comment)
             cur = ledger.cursor()
-            print >>log, datetime.now().isoformat(), \
-                    'Creating record:', date, whofrom, whoto, amount, '"'+comment+'"'
             cur.execute("INSERT INTO Transactions (Date, WhoFrom, WhoTo, Amount, Comment) \
                     VALUES(:date, :whofrom, :whoto, :amount, :comment)",\
                     {'date':date, 'whofrom':whofrom, 'whoto':whoto, 'amount':amount, 'comment':comment})
-        log.close()
 
     def delete (self, entry_id):
-        log = open('../model/log.txt', 'a')
-        with self.db as ledger:
+        with open('../model/log.txt', 'a') as log, self.db as ledger:
             cur = ledger.cursor()
             cur.execute("SELECT * FROM Transactions WHERE TransactionID=?", (entry_id,))
-            tr = cur.fetchall()[0]
-            logtxt = '%s Removing record: %s %s %s %g %s'%(datetime.now().isoformat(), \
-                    tr[1], tr[2], tr[3], tr[4], tr[5])
-            print >>log, logtxt
+            date, whofrom, whoto, amount, comment = cur.fetchall()[0][1:6]
+            print >>log, '%s Removing record: %s %s %s $%0.2f "%s"'%(datetime.now().isoformat(), \
+                    date, whofrom, whoto, float(amount), comment)
             cur.execute("DELETE FROM Transactions WHERE TransactionID=?", (entry_id,))
-        log.close()
 
     def get_all (self):
         with self.db as ledger:
