@@ -27,8 +27,16 @@ div.success {
     font-weight: bold;
 }
 
+p.leftfloat {
+    float: left;
+}
+
+p.rightfloat {
+    float: right;
+}
+
 input {
-    width: 90%;
+    width: 80%;
 }
 
 select {
