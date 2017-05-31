@@ -13,7 +13,7 @@ import page_elements
 from ledger import Ledger
 
 if __name__ == '__main__':
-    with open('../model/settings.json') as settingsfile:
+    with open(srcdir+'/model/settings.json') as settingsfile:
         settings = json.load(settingsfile)
 
     with Ledger(srcdir+'/model/ledger.db', settings['roommate_names']) as ledger, \
