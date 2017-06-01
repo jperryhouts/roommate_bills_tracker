@@ -4,7 +4,7 @@ how much money to whom.
 ![alt tag](https://raw.githubusercontent.com/jperryhouts/roommate_bills_tracker/master/Screenshot.png)
 
 ```
-git clone ...
+git clone https://github.com/jperryhouts/roommate_bills_tracker.git
 cd roommate_bills_tracker
 
 # Install bill-tracker
