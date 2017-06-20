@@ -17,8 +17,12 @@ edit /usr/local/www/apache24/model/settings.json
 
 # Setup Apache:
 patch /usr/local/etc/apache24/httpd.conf doc/httpd.conf.patch
+htpassword -c /usr/local/etc/apache24/passwords LOGIN (replace LOGIN with the login name)
+service apache24 restart
+```
+
 <pre>
-the patch will do the following:
+The patch in the Apache setup step will do the following:
   * Enable mod_cgid
   * Enable mod_include
   * Uncomment ServerAdmin <email address> (manually change this)
@@ -31,6 +35,3 @@ the patch will do the following:
   * Set ScriptAlias to 'controller' directory
   * Enable executing Python scripts in 'controller' directory
 </pre>
-htpassword -c /usr/local/etc/apache24/passwords LOGIN (replace LOGIN with the login name)
-service apache24 restart
-```
