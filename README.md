@@ -17,6 +17,20 @@ edit /usr/local/www/apache24/model/settings.json
 
 # Setup Apache:
 patch /usr/local/etc/apache24/httpd.conf doc/httpd.conf.patch
-htpassword -c /usr/local/etc/apache24/passwords 1065
+<pre>
+the patch will do the following:
+  * Enable mod_cgid
+  * Enable mod_include
+  * Uncomment ServerAdmin <email address> (manually change this)
+  * Set DocumentRoot "/usr/local/www/apache24/view"
+  * Uncomment ServerName (manually change this)
+  * Add Option Includes
+  * Set XBitHack on
+  * Enable .htaccess AuthConfig override
+  * Setup Authorization
+  * Set ScriptAlias to 'controller' directory
+  * Enable executing Python scripts in 'controller' directory
+</pre>
+htpassword -c /usr/local/etc/apache24/passwords LOGIN (replace LOGIN with the login name)
 service apache24 restart
 ```

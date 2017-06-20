@@ -15,11 +15,11 @@
 210c211
 < ServerAdmin you@example.com
 ---
-> ServerAdmin jonathan@invertedearth.net
+> ServerAdmin ADMIN_EMAIL_EDITME
 219c220
 < #ServerName www.example.com:80
 ---
-> ServerName foxinsocks.rocks:80
+> ServerName URI_EDITME:80
 243,244c244,245
 < DocumentRoot "/usr/local/www/apache24/data"
 < <Directory "/usr/local/www/apache24/data">
@@ -42,7 +42,7 @@
 >     AuthName "Bills"
 >     AuthBasicProvider file
 >     AuthUserFile "/usr/local/etc/apache24/passwords"
->     Require user 1065
+>     Require user LOGIN_EDITME
 277c283
 <     DirectoryIndex index.html
 ---
