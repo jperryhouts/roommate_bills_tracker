@@ -51,7 +51,7 @@ class Ledger():
         return ledger
 
     def insert (self, date, whofrom, whoto, amount, comment):
-        with open('../model/log.txt', 'a') as log, self.db as ledger:
+        with open('../model/ledger.log', 'a') as log, self.db as ledger:
             print >>log, '%s Creating record: %s %s %s $%0.2f "%s"'%(datetime.now().isoformat(), \
                     date, whofrom, whoto, float(amount), comment)
             cur = ledger.cursor()
@@ -60,7 +60,7 @@ class Ledger():
                     {'date':date, 'whofrom':whofrom, 'whoto':whoto, 'amount':amount, 'comment':comment})
 
     def delete (self, entry_id):
-        with open('../model/log.txt', 'a') as log, self.db as ledger:
+        with open('../model/ledger.log', 'a') as log, self.db as ledger:
             cur = ledger.cursor()
             cur.execute("SELECT * FROM Transactions WHERE TransactionID=?", (entry_id,))
             date, whofrom, whoto, amount, comment = cur.fetchall()[0][1:6]
