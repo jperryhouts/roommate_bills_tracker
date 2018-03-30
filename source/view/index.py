@@ -37,11 +37,12 @@ if __name__ == '__main__':
     with Ledger('../model/ledger.db', settings['roommate_names']) as ledger:
         html = '''
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
         <head>
           <title>Cannon Ct. Bills</title>
           <link rel="stylesheet" href="style/styles.css" />
           <link rel="icon" type="image/png" href="images/bills_icon.png" />
+          <meta http-equiv="content-language" content="en">
         </head>
 
         <body>
